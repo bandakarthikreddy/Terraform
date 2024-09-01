@@ -10,17 +10,17 @@ resource "null_resource" "name" {
                 private_key     = file("private-key/terraform-key.pem")
         }
 
-## FILE PROVISIONER: Copies the terraform-key.pem file /tmp/terraform-key.pem
-provisioner "file" {
-        source  = "private-key/terraform-key.pem"
-        destination     = "/tmp/terraform-key.pem"
-        }
-
 ## REMOTE EXEC PROVISIONER: Using Remote Exec fix the private key permissions on Bastion Host
 provisioner "remote-exec" {
         inline  = [
                 "sudo chmod 400 /tmp/terraform-key.pem"
                 ]
+        }
+
+## FILE PROVISIONER: Copies the terraform-key.pem file /tmp/terraform-key.pem
+provisioner "file" {
+        source  = "private-key/terraform-key.pem"
+        destination     = "/tmp/terraform-key.pem"
         }
 
 ## LOCAL EXEC PROVISIONER: Local Exec Provisioner (Creation Time Provisioner - Triggered during Create Resource)
