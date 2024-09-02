@@ -18,6 +18,10 @@ module "vpc" {
 #	create_datase_nat_gateway		= true
 */
 
+	# NAT Gateway for outbound communication
+	enable_nat_gateway	= true
+	single_nat_gateway	= true
+
 	# VPC DNS PARAMETERS
 	enable_dns_hostnames	= true
 	enable_dns_support	= true
